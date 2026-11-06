@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17392d">
+    <title>Welcome Back | Gaia Conscious</title>
+
+    <style>
+        :root {
+            --green: #17392d;
+            --green-light: #285542;
+            --cream: #ffffff;
+            --sage: #eaf0e7;
+            --line: #dce3da;
+            --muted: #687168;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--cream);
+            color: #24372c;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.5;
+        }
+
+        a {
+            color: var(--green-light);
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .navbar {
+            width: 92%;
+            max-width: 1160px;
+            min-height: 78px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--green);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .brand small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: normal;
+        }
+
+        .top-link {
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 1;
+            display: grid;
+            place-items: center;
+            padding: 40px 18px;
+        }
+
+        .login-layout {
+            width: 100%;
+            max-width: 790px;
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .login-card,
+        .welcome-panel {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .login-card {
+            background: white;
+            padding: 38px;
+        }
+
+        .eyebrow {
+            color: var(--green-light);
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            color: var(--green);
+            font-size: 35px;
+            line-height: 1.2;
+            margin: 12px 0 10px;
+        }
+
+        .intro {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 18px 0 7px;
+        }
+
+        input {
+            width: 100%;
+            min-height: 45px;
+            padding: 12px;
+            border: 1px solid #cbd4ca;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        input:focus {
+            outline: 2px solid #b4cbb5;
+            border-color: var(--green-light);
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin: 18px 0 23px;
+            font-size: 12px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .remember input {
+            width: 15px;
+            min-height: 15px;
+            margin: 0;
+        }
+
+        .options a {
+            text-align: right;
+        }
+
+        .primary-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 5px;
+            background: var(--green);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .primary-button:hover {
+            background: var(--green-light);
+        }
+
+        .status {
+            color: #9a4c35;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+
+        .bottom {
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 22px;
+        }
+
+        .welcome-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--sage);
+            padding: 28px 24px;
+        }
+
+        .leaf-mark {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #d5e3d2;
+            color: var(--green);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-panel h2 {
+            color: var(--green);
+            font-size: 22px;
+            line-height: 1.3;
+            margin: 0 0 12px;
+        }
+
+        .welcome-panel p {
+            color: #5f6d61;
+            font-size: 13px;
+            margin: 0 0 17px;
+        }
+
+        .welcome-panel ul {
+            padding-left: 18px;
+            color: #5f6d61;
+            font-size: 12px;
+        }
+
+        .welcome-panel li {
+            margin: 9px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 11px;
+            padding: 0 18px 24px;
+        }
+
+        @media (max-width: 700px) {
+            .login-layout {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+            }
+
+            .welcome-panel {
+                order: -1;
+                padding: 22px;
+            }
+
+            .login-card {
+                padding: 28px 23px;
+            }
+
+            .navbar {
+                min-height: 68px;
+            }
+
+            .brand img {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .top-link {
+                max-width: 125px;
+                text-align: right;
+            }
+
+            .options {
+                align-items: flex-start;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+
+        <a class="brand" href="index.html">
+            <img src="assets/emblem.png" alt="Gaia Conscious emblem">
+            <span>
+                Gaia Conscious
+                <small>Healthy people. Healthy planet.</small>
+            </span>
+        </a>
+
+        <a class="top-link" href="signup.html">
+            New to Gaia? <strong>Create an account</strong>
+        </a>
+
+    </div>
+</header>
+
+<main>
+
+    <div class="login-layout">
+
+        <section class="login-card">
+
+            <div class="eyebrow">Your account</div>
+
+            <h1>Welcome back</h1>
+
+            <p class="intro">
+                Log in to continue your Gaia Conscious journey.
+            </p>
+
+            <form id="loginForm">
+
+                <label for="email">Business email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@yourorganisation.com"
+                    autocomplete="username"
+                    required
+                >
+
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <div class="options">
+
+                    <label class="remember">
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+
+                    <a href="forgot-password.html">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+                <button class="primary-button" type="submit">
+                    Log in
+                </button>
+
+                <p
+                    class="status"
+                    id="status"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+            <p class="bottom">
+                Don't have an account?
+                <a href="signup.html">Sign up</a>
+            </p>
+
+            <p class="bottom">
+                <a href="index.html">← Back to homepage</a>
+            </p>
+
+        </section>
+
+        
+
+    </div>
+
+</main>
+
+<footer>
+    Gaia Conscious · Healthy people. Healthy planet.
+</footer>
+
+<script>
+    document.getElementById("loginForm").addEventListener(
+        "submit",
+        function (event) {
+            event.preventDefault();
+
+            document.getElementById("status").textContent =
+                "The form is ready, but login authentication still needs to be connected.";
+        }
+    );
+</script>
+
+</body>
+</html>
+

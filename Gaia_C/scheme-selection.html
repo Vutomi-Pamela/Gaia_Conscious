@@ -1,0 +1,900 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17392d">
+<title>Gaia Conscious | Scheme Selection</title>
+<link rel="stylesheet" href="assets/styles.css">
+
+<style>
+:root {
+    --green: #17392d;
+    --green-light: #285542;
+    --sage: #eaf0e7;
+    --line: #dce3da;
+    --muted: #687168;
+    --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--white);
+    color: var(--green);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 28px 6%;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 45px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand img {
+    width: 75px;
+    height:75px;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.brand-subtitle {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+.step-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.intro { margin-bottom: 32px; }
+
+.eyebrow {
+    margin-bottom: 12px;
+    color: var(--green-light);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0 0 14px;
+    font-size: clamp(32px, 5vw, 46px);
+    font-weight: 500;
+    letter-spacing: -1.5px;
+}
+
+.intro p {
+    max-width: 650px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.section-heading {
+    margin: 0 0 16px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.scheme-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.scheme-card {
+    min-height: 112px;
+    padding: 18px 12px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--green);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color .2s, background .2s, transform .2s;
+}
+
+.scheme-card:hover {
+    border-color: var(--green-light);
+    transform: translateY(-2px);
+}
+
+.scheme-card.active {
+    border: 2px solid var(--green);
+    background: var(--sage);
+}
+
+.scheme-card .check {
+    display: block;
+    margin-bottom: 17px;
+    color: var(--green-light);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.scheme-card .scheme-name {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.selection-help {
+    margin: 14px 0 30px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.information-panel {
+    padding: 25px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--white);
+}
+
+.information-panel h2 {
+    margin: 0 0 9px;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.information-panel > p {
+    margin: 0 0 22px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.scheme-number {
+    margin-bottom: 8px;
+    color: var(--green-light);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.info-section { margin-top: 22px; }
+
+.info-section h3 {
+    margin: 0 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.info-list {
+    margin: 0;
+    padding-left: 21px;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.info-list li { padding-left: 4px; margin-bottom: 5px; }
+.info-list strong { color: var(--green); }
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 28px;
+}
+
+.button {
+    display: inline-flex;
+    min-height: 47px;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 22px;
+    border: 1px solid var(--green);
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.button-back {
+    background: transparent;
+    color: var(--green);
+}
+
+.button-next {
+    background: var(--green);
+    color: var(--white);
+}
+
+.button-next:hover { background: var(--green-light); }
+
+.button:focus-visible,
+.scheme-card:focus-visible {
+    outline: 2px solid var(--green-light);
+    outline-offset: 3px;
+}
+
+.message {
+    margin-top: 14px;
+    color: #a33b30;
+    font-size: 13px;
+}
+
+/* CLIENT ID CONFIRMATION POPUP */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 35, 27, .65);
+}
+
+.modal-overlay.show { display: flex; }
+
+.modal {
+    width: 100%;
+    max-width: 470px;
+    padding: 35px;
+    border-radius: 14px;
+    background: var(--white);
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+
+.modal-mark {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--sage);
+    color: var(--green);
+    font-size: 23px;
+}
+
+.modal h2 {
+    margin: 0 0 10px;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.modal-description {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.client-id-label {
+    display: block;
+    margin: 25px 0 9px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.client-id-display {
+    padding: 17px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #f8faf7;
+    color: var(--green);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    overflow-wrap: anywhere;
+}
+
+.copy-button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--green);
+    border-radius: 7px;
+    background: var(--white);
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.copy-button:hover {
+    background: var(--sage);
+}
+
+.continue-button {
+    width: 100%;
+    margin-top: 22px;
+    padding: 15px;
+    border: none;
+    border-radius: 7px;
+    background: var(--green);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.continue-button:hover { background: var(--green-light); }
+
+.copy-status {
+    min-height: 18px;
+    margin-top: 8px;
+    color: var(--green-light);
+    font-size: 12px;
+}
+
+@media (max-width: 760px) {
+    .scheme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .scheme-card:last-child { grid-column: 1 / -1; }
+    .page { padding: 22px 5%; }
+    .topbar { margin-bottom: 35px; }
+}
+
+@media (max-width: 420px) {
+    .brand-name { font-size: 14px; }
+    .step-label { font-size: 11px; }
+    .information-panel { padding: 18px; }
+    .actions { align-items: stretch; }
+    .button { padding: 12px; }
+    .modal { padding: 25px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<main class="page">
+
+<header class="topbar">
+    <div class="brand">
+        <img src="assets/emblem.png" alt="Gaia Conscious logo">
+        <div>
+            <div class="brand-name">GAIA CONSCIOUS</div>
+            <div class="brand-subtitle">INDEPENDENT CERTIFICATION</div>
+        </div>
+    </div>
+
+    <div class="progress-line"><span></span></div>
+    <div class="step-label">· Step 2</div>
+</header>
+
+<section class="content">
+
+    <div class="intro">
+        <div class="eyebrow">Your certification journey</div>
+        <h1>Scheme Selection</h1>
+        <p>
+            Select the certification scheme that best matches your
+            business. Review the requirements and applicable fees
+            before proceeding.
+        </p>
+    </div>
+
+    <h2 class="section-heading">Select a certification scheme</h2>
+
+    <div class="scheme-grid" role="group" aria-label="Certification scheme options">
+
+        <button type="button" class="scheme-card" data-scheme="Salon" aria-pressed="false">
+            <span class="check">01</span>
+            <span class="scheme-name">Salon</span>
+        </button>
+
+        <button type="button" class="scheme-card" data-scheme="Hospitality" aria-pressed="false">
+            <span class="check">02</span>
+            <span class="scheme-name">Hospitality</span>
+        </button>
+
+        <button type="button" class="scheme-card" data-scheme="Product" aria-pressed="false">
+            <span class="check">03</span>
+            <span class="scheme-name">Product</span>
+        </button>
+
+        <button type="button" class="scheme-card" data-scheme="Aesthetic" aria-pressed="false">
+            <span class="check">04</span>
+            <span class="scheme-name">Aesthetic</span>
+        </button>
+
+        <button type="button" class="scheme-card" data-scheme="Packaging" aria-pressed="false">
+            <span class="check">05</span>
+            <span class="scheme-name">Packaging</span>
+        </button>
+
+    </div>
+
+    <p class="selection-help">
+        Click a scheme above to open its information.
+    </p>
+
+    <section class="information-panel" id="informationPanel" hidden aria-live="polite">
+
+        <div class="scheme-number" id="schemeNumber"></div>
+        <h2 id="schemeTitle"></h2>
+        <p id="schemeDescription"></p>
+
+        <div id="schemeInformation"></div>
+
+        <div class="actions">
+            <button type="button" class="button button-back" id="backButton">
+                Back
+            </button>
+
+            <button type="button" class="button button-next" id="selectSchemeButton">
+                Select Scheme
+            </button>
+        </div>
+
+        <p class="message" id="schemeMessage" role="status"></p>
+
+    </section>
+
+</section>
+</main>
+
+
+<!-- CLIENT ID POPUP -->
+
+<div class="modal-overlay" id="clientModal" role="dialog"
+     aria-modal="true" aria-labelledby="modalTitle">
+
+    <div class="modal">
+
+        <div class="modal-mark">✓</div>
+
+        <h2 id="modalTitle">Scheme Selected Successfully</h2>
+
+        <p class="modal-description">
+            Your scheme selection has been recorded.
+            A unique Client ID has been generated for your registration.
+            Please keep this ID for future reference.
+        </p>
+
+        <span class="client-id-label">Your Client ID</span>
+
+        <div class="client-id-display" id="clientIDDisplay"></div>
+
+        <button type="button" class="copy-button" id="copyClientID">
+            Copy Client ID
+        </button>
+
+        <div class="copy-status" id="copyStatus" role="status"></div>
+
+        <button type="button" class="continue-button" id="continueDashboard">
+            Continue to Dashboard
+        </button>
+
+    </div>
+</div>
+
+
+<script>
+
+// ==========================================
+// SCHEME INFORMATION
+// ==========================================
+
+const schemeDetails = {
+
+    Salon: {
+        number: "Scheme 01",
+        description: "Certification for salons, beauty bars, nail businesses, lash businesses and hair businesses.",
+        standard: "GC-SALON-STD-001 v1.1",
+        gates: "7",
+        certification: "60%",
+        silver: "75%",
+        gold: "85%",
+        micro: "55%",
+        safeguards: [
+            "A Chemical Safety: 18/30",
+            "B IAQ: 13/25"
+        ],
+        validity: "36 months",
+        declaration: "Yes",
+        fees: [
+            "Solo: R7,500",
+            "Small: R12,000",
+            "Mid: R18,500",
+            "Large: R28,000"
+        ],
+        bonus: "CR /5 (non-tier)"
+    },
+
+    Hospitality: {
+        number: "Scheme 02",
+        description: "Certification for hospitality businesses such as hotels, restaurants and cafes.",
+        standard: "v3.1 + ANNEX v2.1",
+        gates: "5",
+        certification: "60%",
+        silver: "75%",
+        gold: "85%",
+        micro: "54% (small ×0.9)",
+        safeguards: [
+            "A Guest Wellbeing: 10/20",
+            "B IAQ: 8/15",
+            "H Governance: 3/5"
+        ],
+        validity: "36 months",
+        declaration: "Yes",
+        fees: [
+            "Small: R12,500",
+            "Mid: R23,000",
+            "Large: R35,500"
+        ],
+        bonus: "Not applicable"
+    },
+
+    Product: {
+        number: "Scheme 03",
+        description: "Certification for product brands and businesses that manufacture or sell products.",
+        standard: "v3.1 + ANNEX v1.1",
+        gates: "5",
+        certification: "65%",
+        silver: "80%",
+        gold: "90%",
+        micro: "Risk ×1.2 / 1.0 / 0.9",
+        safeguards: [
+            "A Chemical Safety: 18/30",
+            "B Emissions: 10/20"
+        ],
+        validity: "36 months",
+        declaration: "Yes",
+        fees: [
+            "According to the applicable fee schedule"
+        ],
+        bonus: "NP /5 (non-tier)"
+    },
+
+    Aesthetic: {
+        number: "Scheme 04",
+        description: "Certification for aesthetic and beauty treatment businesses.",
+        standard: "GC-AEST-STD-001 v1.0",
+        gates: "8",
+        certification: "60%",
+        silver: "75%",
+        gold: "85%",
+        micro: "55%",
+        safeguards: [
+            "A Active Ingredients: 18/30",
+            "B Client Safety: 13/25"
+        ],
+        validity: "12 months",
+        declaration: "N/A – Annual",
+        fees: [
+            "Solo: R7,500",
+            "Small: R12,000",
+            "Mid: R18,500",
+            "Large: R28,000"
+        ],
+        bonus: "G bonus /3"
+    },
+
+    Packaging: {
+        number: "Scheme 05",
+        description: "Certification for packaging solutions and packaging-related businesses.",
+        standard: "GC-PACK-STD-001 v1.0",
+        gates: "5",
+        certification: "60%",
+        silver: "75%",
+        gold: "85%",
+        micro: "55% (micro converter)",
+        safeguards: [
+            "A Material & Chemical Safety: 18/30",
+            "B Recyclability & Design: 13/25"
+        ],
+        validity: "36 months",
+        declaration: "Yes",
+        fees: [
+            "Solo: R9,500",
+            "Small: R16,000",
+            "Mid: R26,000",
+            "Large: R42,000"
+        ],
+        bonus: "G bonus /3"
+    }
+
+};
+
+
+// ==========================================
+// ELEMENTS
+// ==========================================
+
+const schemeCards = document.querySelectorAll(".scheme-card");
+const informationPanel = document.getElementById("informationPanel");
+const schemeNumber = document.getElementById("schemeNumber");
+const schemeTitle = document.getElementById("schemeTitle");
+const schemeDescription = document.getElementById("schemeDescription");
+const schemeInformation = document.getElementById("schemeInformation");
+const schemeMessage = document.getElementById("schemeMessage");
+const selectSchemeButton = document.getElementById("selectSchemeButton");
+const backButton = document.getElementById("backButton");
+
+const clientModal = document.getElementById("clientModal");
+const clientIDDisplay = document.getElementById("clientIDDisplay");
+const copyClientID = document.getElementById("copyClientID");
+const copyStatus = document.getElementById("copyStatus");
+const continueDashboard = document.getElementById("continueDashboard");
+
+let selectedScheme = "";
+
+
+// ==========================================
+// DISPLAY SCHEME INFORMATION
+// ==========================================
+
+function displaySchemeInformation(details) {
+
+    schemeInformation.innerHTML = "";
+
+    function addSection(title, items) {
+
+        const section = document.createElement("div");
+        section.className = "info-section";
+
+        const heading = document.createElement("h3");
+        heading.textContent = title;
+
+        const list = document.createElement("ul");
+        list.className = "info-list";
+
+        items.forEach(function(item) {
+
+            const li = document.createElement("li");
+
+            if (Array.isArray(item)) {
+                const strong = document.createElement("strong");
+                strong.textContent = item[0] + ": ";
+
+                li.appendChild(strong);
+                li.appendChild(document.createTextNode(item[1]));
+            } else {
+                li.textContent = item;
+            }
+
+            list.appendChild(li);
+        });
+
+        section.appendChild(heading);
+        section.appendChild(list);
+        schemeInformation.appendChild(section);
+    }
+
+    addSection("Standard and Certification Requirements", [
+        ["Standard version", details.standard],
+        ["Number of gates", details.gates],
+        ["Certification minimum", details.certification],
+        ["Silver minimum", details.silver],
+        ["Gold minimum", details.gold],
+        ["Micro / Adjusted Certification minimum", details.micro]
+    ]);
+
+    addSection("Safeguard Requirements", details.safeguards);
+
+    addSection("Certification Validity and Declaration", [
+        ["Certificate validity", details.validity],
+        ["Declaration (Year 1 / Year 2)", details.declaration]
+    ]);
+
+    addSection("Certification Fees", details.fees);
+
+    addSection("Bonus Category", [
+        ["Bonus", details.bonus]
+    ]);
+}
+
+
+// ==========================================
+// SCHEME CARD SELECTION
+// ==========================================
+
+schemeCards.forEach(function(card) {
+
+    card.addEventListener("click", function() {
+
+        selectedScheme = card.dataset.scheme;
+
+        const details = schemeDetails[selectedScheme];
+
+        schemeCards.forEach(function(item) {
+
+            const active = item === card;
+
+            item.classList.toggle("active", active);
+            item.setAttribute("aria-pressed", String(active));
+
+        });
+
+        schemeNumber.textContent = details.number;
+        schemeTitle.textContent = selectedScheme + " Scheme";
+        schemeDescription.textContent = details.description;
+
+        displaySchemeInformation(details);
+
+        schemeMessage.textContent = "";
+        informationPanel.hidden = false;
+
+        informationPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    });
+
+});
+
+
+// ==========================================
+// BACK BUTTON
+// ==========================================
+
+backButton.addEventListener("click", function() {
+
+    informationPanel.hidden = true;
+    schemeMessage.textContent = "";
+    selectedScheme = "";
+
+    schemeCards.forEach(function(card) {
+        card.classList.remove("active");
+        card.setAttribute("aria-pressed", "false");
+    });
+
+});
+
+
+// ==========================================
+// UNIQUE CLIENT ID GENERATION
+// ==========================================
+
+function generateClientID(scheme) {
+
+    const prefixes = {
+        Salon: "SAL",
+        Hospitality: "HOS",
+        Product: "PRO",
+        Aesthetic: "AES",
+        Packaging: "PAC"
+    };
+
+    const prefix = prefixes[scheme];
+    const year = new Date().getFullYear();
+
+    const randomPart = crypto.randomUUID()
+        .replace(/-/g, "")
+        .substring(0, 12)
+        .toUpperCase();
+
+    return `GC-${prefix}-${year}-${randomPart}`;
+}
+
+
+// ==========================================
+// SELECT SCHEME AND SHOW CLIENT ID
+// ==========================================
+
+selectSchemeButton.addEventListener("click", function() {
+
+    if (!selectedScheme) {
+        schemeMessage.textContent = "Please select a scheme first.";
+        return;
+    }
+
+    const clientID = generateClientID(selectedScheme);
+
+    // Save client information for the next pages
+
+    const clientData = {
+        clientID: clientID,
+        selectedScheme: selectedScheme,
+        createdAt: new Date().toISOString()
+    };
+
+    localStorage.setItem("gaiaClientData", JSON.stringify(clientData));
+
+    sessionStorage.setItem("clientID", clientID);
+    sessionStorage.setItem("selectedScheme", selectedScheme);
+
+    // Display the generated ID
+
+    clientIDDisplay.textContent = clientID;
+    copyStatus.textContent = "";
+
+    clientModal.classList.add("show");
+
+    copyClientID.focus();
+
+});
+
+
+// ==========================================
+// COPY CLIENT ID
+// ==========================================
+
+copyClientID.addEventListener("click", async function() {
+
+    const clientID = clientIDDisplay.textContent;
+
+    try {
+
+        await navigator.clipboard.writeText(clientID);
+
+        copyStatus.textContent = "Client ID copied successfully.";
+
+        copyClientID.textContent = "Copied ✓";
+
+    } catch (error) {
+
+        // Fallback for browsers without clipboard access
+
+        const temp = document.createElement("textarea");
+        temp.value = clientID;
+
+        document.body.appendChild(temp);
+        temp.select();
+
+        const copied = document.execCommand("copy");
+
+        temp.remove();
+
+        copyStatus.textContent = copied
+            ? "Client ID copied successfully."
+            : "Please select and copy your Client ID manually.";
+
+    }
+
+});
+
+
+// ==========================================
+// CONTINUE TO DASHBOARD
+// ==========================================
+
+continueDashboard.addEventListener("click", function() {
+
+    window.location.href = "dashboard.html";
+
+});
+
+</script>
+
+</body>
+</html>

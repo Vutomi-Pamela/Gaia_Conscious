@@ -1,0 +1,1188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17392d">
+<title>Gaia Conscious | Client Dashboard</title>
+
+<style>
+:root {
+    --green: #17392d;
+    --green-light: #285542;
+    --sage: #eaf0e7;
+    --line: #dce3da;
+    --muted: #687168;
+    --white: #ffffff;
+    --surface: #f8faf8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--white);
+    color: var(--green);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button, a {
+    font: inherit;
+}
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--green);
+    color: white;
+}
+
+.sidebar-brand {
+    min-height: 112px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 22px 20px;
+    border-bottom: 1px solid rgba(255,255,255,.14);
+}
+
+.sidebar-brand img {
+    width: 62px;
+    height: 62px;
+    object-fit: contain;
+    object-position: center;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.brand-subtitle {
+    margin-top: 5px;
+    color: rgba(255,255,255,.65);
+    font-size: 9px;
+    letter-spacing: 1.3px;
+}
+
+.menu-heading {
+    padding: 27px 22px 11px;
+    color: rgba(255,255,255,.55);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 12px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(255,255,255,.8);
+    text-align: left;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: rgba(255,255,255,.14);
+    color: white;
+}
+
+.menu-item.active {
+    font-weight: 700;
+}
+
+.menu-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 16px 12px 20px;
+    border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.logout-button {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: white;
+    text-align: left;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: rgba(255,255,255,.14);
+}
+
+.sidebar-note {
+    margin: 13px 14px 0;
+    color: rgba(255,255,255,.5);
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+/* MAIN AREA */
+
+.main-area {
+    flex: 1;
+    min-width: 0;
+    background: var(--surface);
+}
+
+.top-header {
+    min-height: 78px;
+    padding: 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    background: white;
+}
+
+.header-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.header-subtitle {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.header-user-name {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.user-initial {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--sage);
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* DASHBOARD CONTENT */
+
+.dashboard-content {
+    max-width: 1500px;
+    margin: auto;
+    padding: 34px 38px 48px;
+}
+
+.welcome-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.eyebrow {
+    margin-bottom: 10px;
+    color: var(--green-light);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0 0 9px;
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 500;
+}
+
+.welcome-copy {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* CLIENT ID */
+
+.client-information {
+    min-width: 300px;
+    max-width: 390px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+}
+
+.client-label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.client-id {
+    font-size: 14px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.copy-client-button {
+    flex-shrink: 0;
+    padding: 9px 12px;
+    border: 1px solid var(--green);
+    border-radius: 5px;
+    background: white;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.copy-client-button:hover {
+    background: var(--sage);
+}
+
+.copy-message {
+    margin-top: 6px;
+    color: var(--green-light);
+    font-size: 10px;
+}
+
+/* SCHEME BANNER */
+
+.scheme-banner {
+    margin-top: 28px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: white;
+}
+
+.scheme-banner-top {
+    padding: 21px 24px 18px;
+    text-align: center;
+}
+
+.scheme-name {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.scheme-status {
+    padding: 12px;
+    background: var(--green);
+    color: white;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* OVERVIEW CARDS */
+
+.section-heading {
+    margin: 30px 0 14px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.metric-card {
+    min-height: 132px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+}
+
+.metric-main {
+    min-height: 88px;
+    display: grid;
+    place-items: center;
+    padding: 15px;
+    text-align: center;
+}
+
+.metric-value {
+    color: var(--green);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.metric-label {
+    padding: 11px 8px;
+    background: var(--green);
+    color: white;
+    text-align: center;
+    font-size: 11px;
+}
+
+/* CONTENT PANELS */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.panel {
+    padding: 21px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+    min-width: 0;
+}
+
+.panel h2 {
+    margin: 0 0 16px;
+    font-size: 15px;
+}
+
+.panel-description {
+    margin: -7px 0 17px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.progress-track {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--sage);
+}
+
+.progress-fill {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--green-light);
+}
+
+.progress-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.status-list {
+    display: grid;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+}
+
+.status-row:first-child {
+    border-top: none;
+}
+
+.status-pill {
+    padding: 5px 9px;
+    border-radius: 20px;
+    background: var(--sage);
+    color: var(--green);
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.next-step {
+    display: flex;
+    gap: 12px;
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+}
+
+.next-step-icon {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--sage);
+}
+
+.next-step strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.next-step p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.activity-empty {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* ORGANISATION */
+
+.info-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 17px 20px;
+}
+
+.info-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.info-value {
+    color: var(--green);
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.page-footer {
+    padding: 20px 38px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 10px;
+    background: white;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+    .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .welcome-row {
+        flex-direction: column;
+    }
+
+    .client-information {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 760px) {
+    .sidebar {
+        width: 72px;
+        min-width: 72px;
+    }
+
+    .sidebar-brand {
+        justify-content: center;
+        padding: 18px 5px;
+    }
+
+    .sidebar-brand img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .sidebar-brand > div,
+    .menu-heading,
+    .menu-text,
+    .sidebar-note {
+        display: none;
+    }
+
+    .sidebar-menu {
+        padding: 12px 7px;
+    }
+
+    .menu-item,
+    .logout-button {
+        justify-content: center;
+        padding: 13px 5px;
+    }
+
+    .top-header {
+        padding: 0 18px;
+    }
+
+    .dashboard-content {
+        padding: 26px 18px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-footer {
+        padding: 17px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .metrics-grid {
+        gap: 9px;
+    }
+
+    .metric-value {
+        font-size: 18px;
+    }
+
+    .client-information {
+        min-width: 0;
+    }
+
+    .info-list {
+        grid-template-columns: 1fr;
+    }
+
+    .header-user-name {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- LEFT SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <img src="assets/emblem.png" alt="Gaia Conscious logo">
+            <div>
+                <div class="brand-name">GAIA CONSCIOUS</div>
+                <div class="brand-subtitle">CLIENT PORTAL</div>
+            </div>
+        </div>
+
+        <div class="menu-heading">Main Menu</div>
+
+        <nav class="sidebar-menu">
+
+            <a class="menu-item active" href="#dashboard">
+                <span class="menu-text">Dashboard</span>
+            </a>
+
+            <a class="menu-item" href="application.html">
+                <span class="menu-text">Application Overview</span>
+            </a>
+
+            <a class="menu-item" href="#documents">
+                <span class="menu-text">Documents</span>
+            </a>
+
+            <a class="menu-item" href="#assessment">
+                <span class="menu-text">Assessment</span>
+            </a>
+
+            <a class="menu-item" href="#reports">
+                <span class="menu-text">Reports</span>
+            </a>
+
+            <a class="menu-item" href="#certification">
+                <span class="menu-text">Certification</span>
+            </a>
+
+            <a class="menu-item" href="#organisation">
+                <span class="menu-text">Organisation</span>
+            </a>
+
+        </nav>
+
+        <div class="menu-heading">Account</div>
+
+        <nav class="sidebar-menu">
+            <a class="menu-item" href="#organisation">
+                <span class="menu-text">Account Information</span>
+            </a>
+        </nav>
+
+        <!-- LOGOUT AT BOTTOM -->
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-button" id="logoutButton">
+                <span class="menu-text">Log Out</span>
+            
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN DASHBOARD -->
+
+    <main class="main-area" id="dashboard">
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div>
+                <div class="header-title">CLIENT DASHBOARD</div>
+                <div class="header-subtitle">
+                    Gaia Conscious Certification Portal
+                </div>
+            </div>
+
+            <div class="header-right">
+
+                <span class="header-user-name" id="headerUserName">
+                    Client account
+                </span>
+
+                <div class="user-initial" id="userInitial">G</div>
+
+            </div>
+
+        </header>
+
+
+        <section class="dashboard-content">
+
+            <!-- WELCOME -->
+
+            <div class="welcome-row">
+
+                <div>
+                    <div class="eyebrow">CLIENT PORTAL</div>
+
+                    <h1 id="welcomeName">Welcome</h1>
+
+                    <p class="welcome-copy">
+                    </p>
+                </div>
+
+
+                <!-- CLIENT ID -->
+
+                <div class="client-information">
+
+                    <div>
+                        <span class="client-label">YOUR CLIENT ID</span>
+
+                        <div class="client-id" id="dashboardClientID">
+                            Loading...
+                        </div>
+
+                        <div class="copy-message" id="copyMessage"></div>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="copy-client-button"
+                        id="dashboardCopyButton">
+                        Copy ID
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SELECTED SCHEME -->
+
+            <div class="scheme-banner">
+
+                <div class="scheme-banner-top">
+
+                    <div class="eyebrow">
+                        SELECTED CERTIFICATION SCHEME
+                    </div>
+
+                    <div class="scheme-name" id="schemeName">
+                        Scheme not selected
+                    </div>
+
+                </div>
+
+                <div class="scheme-status" id="schemeStatus">
+                    APPLICATION 
+                </div>
+
+            </div>
+
+
+            <!-- OVERVIEW -->
+
+            <h2 class="section-heading">
+                Certification Overview
+            </h2>
+
+            <div class="metrics-grid" id="application">
+
+                <article class="metric-card" id="documents">
+
+                    <div class="metric-main">
+                        <div class="metric-value" id="documentsValue">
+                            Pending
+                        </div>
+                    </div>
+
+                    <div class="metric-label">
+                        Documents Submitted
+                    </div>
+
+                </article>
+
+
+                <article class="metric-card" id="reports">
+
+                    <div class="metric-main">
+                        <div class="metric-value" id="reportsValue">
+                            Pending
+                        </div>
+                    </div>
+
+                    <div class="metric-label">
+                        Reports
+                    </div>
+
+                </article>
+
+
+                <article class="metric-card" id="assessment">
+
+                    <div class="metric-main">
+                        <div class="metric-value" id="assessmentValue">
+                            Not Scheduled
+                        </div>
+                    </div>
+
+                    <div class="metric-label">
+                        Assessment
+                    </div>
+
+                </article>
+
+
+                <article class="metric-card" id="certification">
+
+                    <div class="metric-main">
+                        <div class="metric-value" id="decisionValue">
+                            Pending
+                        </div>
+                    </div>
+
+                    <div class="metric-label">
+                        Certification Decision
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- PROGRESS AND NEXT STEP -->
+
+            <div class="content-grid">
+
+                <section class="panel">
+
+                    <h2>Application Progress</h2>
+
+                    <p class="panel-description">
+                    </p>
+
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+
+                    <div class="progress-caption">
+                        <span id="progressText">
+                            Application not yet updated
+                        </span>
+
+                        <span id="progressPercent">—</span>
+                    </div>
+
+
+                    <div class="status-list" style="margin-top:18px">
+
+                        <div class="status-row">
+                            <span>Registration</span>
+                            <span class="status-pill">Recorded at sign-up</span>
+                        </div>
+
+                        <div class="status-row">
+                            <span>Document Review</span>
+                            <span class="status-pill">Awaiting update</span>
+                        </div>
+
+                        <div class="status-row">
+                            <span>Assessment</span>
+                            <span class="status-pill">Awaiting schedule</span>
+                        </div>
+
+                        <div class="status-row">
+                            <span>Certification Decision</span>
+                            <span class="status-pill">Not yet issued</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section class="panel">
+
+                    <h2>Next Step</h2>
+
+                    <div class="next-step">
+
+                        <div class="next-step-icon"></div>
+
+                        <div>
+                            <strong>Check Your Application Requirements</strong>
+
+                            <p>
+                                 Outstanding information, appliaction updates 
+                                and deadline (reminder).
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <h2 style="margin-top:23px">
+                        Updates & Notifications
+                    </h2>
+
+                    <p class="activity-empty" id="activityMessage">
+                        updates and notification 
+
+                </section>
+
+            </div>
+
+
+            <!-- ORGANISATION INFORMATION -->
+
+            <section class="panel" id="organisation"
+                style="margin-top:16px">
+
+                <h2>Organisation Information</h2>
+
+                <div class="info-list">
+
+                    <div>
+                        <span class="info-label">Organisation Name</span>
+                        <span class="info-value" id="organisationName">
+                            Not provided
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Contact Person</span>
+                        <span class="info-value" id="contactName">
+                            Not provided
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Selected Scheme</span>
+                        <span class="info-value" id="organisationScheme">
+                            Not selected
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="info-label">Client ID</span>
+                        <span class="info-value" id="organisationClientID">
+                            Not available
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+      
+    </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+/* RETRIEVE REGISTERED INFORMATION */
+
+function getStoredValue(key) {
+
+    return sessionStorage.getItem(key)
+        || localStorage.getItem(key)
+        || "";
+
+}
+
+
+let savedClientData = {};
+
+try {
+
+    savedClientData = JSON.parse(
+        localStorage.getItem("gaiaClientData") || "{}"
+    );
+
+} catch (error) {
+
+    savedClientData = {};
+
+}
+
+
+const firstName = getStoredValue("firstName");
+
+const lastName = getStoredValue("lastName");
+
+const businessName =
+    getStoredValue("business")
+    || savedClientData.business
+    || "";
+
+const fullName =
+    [firstName, lastName].filter(Boolean).join(" ").trim();
+
+const displayName =
+    fullName || businessName || "Client";
+
+
+/* CLIENT ID */
+
+const clientID =
+    getStoredValue("clientID")
+    || savedClientData.clientID
+    || "";
+
+
+/* SELECTED SCHEME */
+
+const selectedScheme =
+    getStoredValue("selectedScheme")
+    || savedClientData.selectedScheme
+    || "";
+
+
+/* DISPLAY USER INFORMATION */
+
+document.getElementById("welcomeName").textContent =
+    "Welcome, " + displayName;
+
+document.getElementById("headerUserName").textContent =
+    displayName;
+
+document.getElementById("userInitial").textContent =
+    displayName.charAt(0).toUpperCase();
+
+
+/* DISPLAY CLIENT ID */
+
+document.getElementById("dashboardClientID").textContent =
+    clientID || "Client ID unavailable";
+
+document.getElementById("organisationClientID").textContent =
+    clientID || "Not available";
+
+
+/* DISPLAY SCHEME */
+
+document.getElementById("schemeName").textContent =
+    selectedScheme || "Scheme not selected";
+
+document.getElementById("organisationScheme").textContent =
+    selectedScheme || "Not selected";
+
+
+/* ORGANISATION DETAILS */
+
+document.getElementById("organisationName").textContent =
+    businessName || "Not provided";
+
+document.getElementById("contactName").textContent =
+    fullName || "Not provided";
+
+
+/* CURRENT YEAR */
+
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+
+/* COPY CLIENT ID */
+
+document.getElementById("dashboardCopyButton")
+.addEventListener("click", async function() {
+
+    const message =
+        document.getElementById("copyMessage");
+
+    if (!clientID) {
+
+        message.textContent =
+            "No Client ID is available to copy.";
+
+        return;
+
+    }
+
+    try {
+
+        await navigator.clipboard.writeText(clientID);
+
+        message.textContent =
+            "Client ID copied successfully.";
+
+        this.textContent = "Copied ✓";
+
+    } catch (error) {
+
+        const field = document.createElement("textarea");
+
+        field.value = clientID;
+
+        document.body.appendChild(field);
+
+        field.select();
+
+        const copied = document.execCommand("copy");
+
+        field.remove();
+
+        message.textContent = copied
+            ? "Client ID copied successfully."
+            : "Please copy your Client ID manually.";
+
+        if (copied) {
+            this.textContent = "Copied ✓";
+        }
+
+    }
+
+});
+
+
+/* LOG OUT */
+
+document.getElementById("logoutButton")
+.addEventListener("click", function() {
+
+    if (confirm("Are you sure you want to log out?")) {
+
+        sessionStorage.clear();
+
+        window.location.href = "login.html";
+
+    }
+
+});
+
+
+/* SIDEBAR ACTIVE MENU */
+
+document.querySelectorAll(".sidebar-menu a")
+.forEach(function(link) {
+
+    link.addEventListener("click", function() {
+
+        document.querySelectorAll(".sidebar-menu a")
+        .forEach(item => item.classList.remove("active"));
+
+        this.classList.add("active");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+

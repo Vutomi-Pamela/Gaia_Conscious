@@ -1,0 +1,66 @@
+/* Gaia Conscious layout overrides — linked from index.html */
+:root {
+  --peach: #F7E5DA;
+  --gold: #7e6935;
+}
+html, body { width: 100%; min-height: 100%; }
+body { overflow-x: hidden; }
+.wrap { width: min(1440px, calc(100% - 64px)); }
+.nav-inner { min-height: 82px; }
+.brand { gap: 12px; flex-shrink: 0; }
+.brand .bimg { display: block; width: 58px; height: 44px; object-fit: contain; }
+.brand-name { white-space: nowrap; }
+.hero {
+  min-height: calc(100vh - 116px);
+  min-height: calc(100svh - 116px);
+  display: flex; align-items: center;
+  padding: clamp(36px, 5vh, 70px) 0;
+  background: linear-gradient(115deg, #fff 0%, #fff 52%, #fbf0e9 100%);
+}
+.hero-grid {
+  width: min(1440px, calc(100% - 64px));
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+  gap: clamp(32px, 5vw, 88px);
+}
+.hero-content { min-width: 0; }
+.hero h1 { max-width: 760px; }
+.hero-copy { max-width: 620px; }
+.hero-logo {
+  width: 100%; min-height: clamp(340px, 53vh, 590px);
+  padding: clamp(20px, 3vw, 46px);
+  background: #17392d;
+  border: 1px solid #c8a85a;
+  border-radius: 10px;
+  box-shadow: 0 24px 70px rgba(23,57,45,.16);
+  display: grid; place-items: center;
+}
+.hero-logo img {
+  display: block; width: min(100%, 560px); max-height: 68vh;
+  height: auto; object-fit: contain;
+}
+.ticker-track { width: min(1440px, calc(100% - 64px)); margin-inline: auto; }
+.btn-dark { box-shadow: 0 6px 18px rgba(30,46,23,.12); }
+.btn-dark:hover { background: #285542; }
+.btn-outline:hover { border-color: var(--gold); background: var(--peach); }
+/* Ensure the full logo has a dark surface behind its white artwork. */
+.hero-logo.reveal { transition: opacity .65s ease, transform .65s cubic-bezier(.22,.75,.25,1); }
+@media (min-width: 1500px) { .hero-grid { gap: 100px; } .hero-logo { min-height: 620px; } }
+@media (max-width: 950px) {
+  .wrap, .hero-grid, .ticker-track { width: min(calc(100% - 40px), 1440px); }
+  .hero { min-height: auto; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(280px, .85fr); }
+  .hero-logo { min-height: 360px; }
+}
+@media (max-width: 720px) {
+  .wrap, .hero-grid, .ticker-track { width: calc(100% - 32px); }
+  .nav-inner { min-height: 68px; }
+  .brand .bimg { width: 46px; height: 34px; }
+  .brand-name { font-size: 16px; }
+  .brand-name small { font-size: 8px; letter-spacing: .12em; }
+  .hero { padding: 42px 0 36px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+  .hero-logo { min-height: 0; padding: 20px; max-width: 520px; margin: 0 auto; }
+  .hero-logo img { max-height: 42vh; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-logo, .hero-content { animation: none !important; transition: none !important; } }

@@ -1,0 +1,1368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17392d">
+<title>Gaia Conscious | Application Overview</title>
+
+<style>
+:root {
+    --green: #17392d;
+    --green-light: #285542;
+    --sage: #eaf0e7;
+    --line: #dce3da;
+    --muted: #687168;
+    --white: #ffffff;
+    --surface: #f8faf8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--surface);
+    color: var(--green);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button, a, select { font: inherit; }
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--green);
+    color: white;
+}
+
+.sidebar-brand {
+    min-height: 112px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,.14);
+}
+
+.sidebar-brand img {
+    width: 62px;
+    height: 62px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.brand-name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.brand-subtitle {
+    margin-top: 5px;
+    font-size: 9px;
+    color: rgba(255,255,255,.65);
+    letter-spacing: 1.3px;
+}
+
+.menu-heading {
+    padding: 27px 22px 11px;
+    color: rgba(255,255,255,.55);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 12px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+    color: rgba(255,255,255,.8);
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: rgba(255,255,255,.14);
+    color: white;
+}
+
+.menu-item.active { font-weight: 700; }
+
+.menu-icon {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 16px 12px 20px;
+    border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.logout-button {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: white;
+    text-align: left;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: rgba(255,255,255,.14);
+}
+
+/* MAIN */
+
+.main-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.top-header {
+    min-height: 78px;
+    padding: 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-bottom: 1px solid var(--line);
+}
+
+.header-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.header-subtitle {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.header-user-name {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.user-initial {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--sage);
+    font-weight: 700;
+}
+
+.content {
+    max-width: 1500px;
+    margin: auto;
+    padding: 34px 38px 50px;
+}
+
+/* PAGE HEADING */
+
+.eyebrow {
+    margin-bottom: 10px;
+    color: var(--green-light);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+h1 {
+    margin: 0 0 9px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.intro {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.reference-card {
+    min-width: 220px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: white;
+}
+
+.reference-label,
+.detail-label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+
+.reference-value {
+    font-size: 15px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* GENERAL PANELS */
+
+.panel {
+    margin-top: 22px;
+    padding: 23px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: white;
+}
+
+.panel h2 {
+    margin: 0 0 7px;
+    font-size: 16px;
+}
+
+.panel-description {
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.section-heading {
+    margin: 30px 0 14px;
+    font-size: 16px;
+}
+
+/* APPLICATION DETAILS */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 22px;
+}
+
+.detail-value {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* SCHEME */
+
+.scheme-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 21px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: white;
+}
+
+.scheme-name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.stage-label {
+    padding: 8px 13px;
+    border-radius: 4px;
+    background: var(--sage);
+    color: var(--green);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* NINE STAGE TRACKER */
+
+.stage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 12px;
+}
+
+.stage-card {
+    position: relative;
+    min-height: 112px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: white;
+}
+
+.stage-number {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    background: #edf0ed;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.stage-name {
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.stage-status {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.stage-card.completed {
+    border-color: #b8cbbb;
+}
+
+.stage-card.completed .stage-number {
+    background: var(--green);
+    color: white;
+}
+
+.stage-card.current {
+    border: 2px solid var(--green-light);
+    background: #f8fbf8;
+}
+
+.stage-card.current .stage-number {
+    background: var(--green-light);
+    color: white;
+}
+
+.stage-card.current .stage-status {
+    color: var(--green);
+    font-weight: 700;
+}
+
+/* PROGRESS */
+
+.progress-track {
+    height: 8px;
+    margin-top: 18px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--sage);
+}
+
+.progress-fill {
+    width: 0;
+    height: 100%;
+    background: var(--green-light);
+    border-radius: inherit;
+    transition: width .3s ease;
+}
+
+.progress-caption {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* TWO COLUMN PANELS */
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.two-column .panel {
+    margin-top: 16px;
+}
+
+/* TABLES */
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 11px;
+}
+
+th {
+    padding: 12px 10px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 13px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+}
+
+.empty-row {
+    padding: 20px 10px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+    padding: 6px 9px;
+    border-radius: 20px;
+    background: var(--sage);
+    color: var(--green);
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.status.pending {
+    background: #f0f1ee;
+    color: #687168;
+}
+
+.status.warning {
+    background: #f5eee0;
+    color: #80632b;
+}
+
+/* INFORMATION BOXES */
+
+.notice {
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.info-box {
+    padding: 15px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+.info-box strong {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 12px;
+}
+
+.info-box span {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.page-footer {
+    padding: 20px 38px;
+    border-top: 1px solid var(--line);
+    background: white;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px) {
+    .details-grid { grid-template-columns: repeat(2,1fr); }
+    .stage-grid { grid-template-columns: repeat(2,1fr); }
+    .page-heading { flex-direction: column; }
+}
+
+@media(max-width:760px) {
+    .sidebar {
+        width: 72px;
+        min-width: 72px;
+    }
+
+    .sidebar-brand {
+        justify-content: center;
+        padding: 15px 5px;
+    }
+
+    .sidebar-brand img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .sidebar-brand > div,
+    .menu-heading,
+    .menu-text {
+        display: none;
+    }
+
+    .sidebar-menu { padding: 12px 7px; }
+
+    .menu-item,
+    .logout-button {
+        justify-content: center;
+        padding: 13px 5px;
+        text-align: center;
+    }
+
+    .top-header { padding: 0 18px; }
+    .content { padding: 25px 18px; }
+
+    .two-column { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr; }
+    .page-footer { padding: 17px 18px; }
+}
+
+@media(max-width:480px) {
+    .details-grid,
+    .stage-grid { grid-template-columns: 1fr; }
+
+    .header-user-name { display: none; }
+
+    .scheme-banner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-brand">
+        <img src="assets/emblem.png" alt="Gaia Conscious">
+        <div>
+            <div class="brand-name">GAIA CONSCIOUS</div>
+            <div class="brand-subtitle">CLIENT PORTAL</div>
+        </div>
+    </div>
+
+    <div class="menu-heading">Main Menu</div>
+
+    <nav class="sidebar-menu">
+
+        <a class="menu-item" href="dashboard.html">
+           
+            <span class="menu-text">Dashboard</span>
+        </a>
+
+        <a class="menu-item active" href="application.html">
+           
+            <span class="menu-text">Application Overview</span>
+        </a>
+
+        <a class="menu-item" href="documents.html">
+     
+            <span class="menu-text">Documents</span>
+        </a>
+
+        <a class="menu-item" href="assessment.html">
+            
+            <span class="menu-text">Assessment</span>
+        </a>
+
+        <a class="menu-item" href="reports.html">
+            
+            <span class="menu-text">Reports</span>
+        </a>
+
+        <a class="menu-item" href="certification.html">
+            
+            <span class="menu-text">Certification</span>
+        </a>
+
+        <a class="menu-item" href="organisation.html">
+           
+            <span class="menu-text">Organisation</span>
+        </a>
+
+    </nav>
+
+    <div class="menu-heading">Account</div>
+
+    <nav class="sidebar-menu">
+        <a class="menu-item" href="organisation.html">
+          
+            <span class="menu-text">Account Information</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <button class="logout-button" id="logoutButton">
+           
+            <span class="menu-text">Log Out</span>
+        </button>
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="main-area">
+
+    <header class="top-header">
+
+        <div>
+            <div class="header-title">APPLICATION OVERVIEW</div>
+            <div class="header-subtitle">
+                Gaia Conscious Certification Portal
+            </div>
+        </div>
+
+        <div class="header-right">
+            <span class="header-user-name" id="headerUserName">
+                Client account
+            </span>
+            <div class="user-initial" id="userInitial">G</div>
+        </div>
+
+    </header>
+
+
+    <section class="content">
+
+        <!-- PAGE INTRODUCTION -->
+
+        <div class="page-heading">
+
+            <div>
+                <div class="eyebrow">CLIENT PORTAL</div>
+                <h1>Application Overview</h1>
+                <p class="intro">
+                    Follow your certification application, monitor its progress
+                    and view the actions required at each stage.
+                </p>
+            </div>
+
+            <div class="reference-card">
+                <span class="reference-label">Application Reference</span>
+                <div class="reference-value" id="applicationReference">
+                    To be assigned
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- APPLICATION DETAILS -->
+
+        <section class="panel">
+
+            <h2>Application Information</h2>
+
+            <p class="panel-description">
+                Your registered application details.
+            </p>
+
+            <div class="details-grid">
+
+                <div>
+                    <span class="detail-label">Client ID</span>
+                    <div class="detail-value" id="clientID">Loading...</div>
+                </div>
+
+                <div>
+                    <span class="detail-label">Organisation</span>
+                    <div class="detail-value" id="businessName">Loading...</div>
+                </div>
+
+                <div>
+                    <span class="detail-label">Contact Person</span>
+                    <div class="detail-value" id="contactName">Loading...</div>
+                </div>
+
+                <div>
+                    <span class="detail-label">Application Date</span>
+                    <div class="detail-value" id="applicationDate">
+                        To be populated
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SELECTED SCHEME -->
+
+        <div class="section-heading">Selected Certification Scheme</div>
+
+        <div class="scheme-banner">
+
+            <div>
+                <div class="eyebrow">CERTIFICATION SCHEME</div>
+                <div class="scheme-name" id="schemeName">
+                    Scheme not selected
+                </div>
+            </div>
+
+            <div class="stage-label" id="currentStage">
+                CURRENT STAGE: PRE-ASSESSMENT
+            </div>
+
+        </div>
+
+
+        <!-- CERTIFICATION JOURNEY -->
+
+        <div class="section-heading">Your Certification Journey</div>
+
+        <section class="panel">
+
+            <h2>Application Progress</h2>
+
+            <p class="panel-description">
+                Your application moves through nine operational stages.
+                Each stage is updated as your application progresses.
+            </p>
+
+            <div class="stage-grid" id="stageGrid">
+
+                <div class="stage-card completed">
+                    <div class="stage-number">1</div>
+                    <div class="stage-name">Enquiry & Proposal</div>
+                    <div class="stage-status">Completed</div>
+                </div>
+
+                <div class="stage-card completed">
+                    <div class="stage-number">2</div>
+                    <div class="stage-name">Application & Agreement</div>
+                    <div class="stage-status">Completed</div>
+                </div>
+
+                <div class="stage-card current">
+                    <div class="stage-number">3</div>
+                    <div class="stage-name">Pre-Assessment</div>
+                    <div class="stage-status">In Progress</div>
+                </div>
+
+                <div class="stage-card">
+                    <div class="stage-number">4</div>
+                    <div class="stage-name">Assessment</div>
+                    <div class="stage-status">Upcoming</div>
+                </div>
+
+                <div class="stage-card">
+                    <div class="stage-number">5</div>
+                    <div class="stage-name">Reporting</div>
+                    <div class="stage-status">Upcoming</div>
+                </div>
+
+                <div class="stage-card">
+                    <div class="stage-number">6</div>
+                    <div class="stage-name">Certification Decision</div>
+                    <div class="stage-status">Upcoming</div>
+                </div>
+
+                <div class="stage-card">
+                    <div class="stage-number">7</div>
+                    <div class="stage-name">Certificate Issuance</div>
+                    <div class="stage-status">Upcoming</div>
+                </div>
+
+                <div class="stage-card">
+                    <div class="stage-number">8</div>
+                    <div class="stage-name">Surveillance & Renewal</div>
+                    <div class="stage-status">Upcoming</div>
+                </div>
+
+                <div class="stage-card">
+                    <div class="stage-number">9</div>
+                    <div class="stage-name">Closed</div>
+                    <div class="stage-status">Upcoming</div>
+                </div>
+
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="progress-caption">
+                <span id="progressLabel">Application progress</span>
+                <span id="progressPercent">—</span>
+            </div>
+
+        </section>
+
+
+        <!-- CURRENT APPLICATION ACTION -->
+
+        <div class="section-heading">Current Application Requirements</div>
+
+        <section class="panel">
+
+            <div class="details-grid">
+
+                <div>
+                    <span class="detail-label">Current Stage</span>
+                    <div class="detail-value" id="stageDetail">
+                        Pre-Assessment
+                    </div>
+                </div>
+
+                <div>
+                    <span class="detail-label">Next Action</span>
+                    <div class="detail-value" id="nextAction">
+                        Awaiting document requirements
+                    </div>
+                </div>
+
+                <div>
+                    <span class="detail-label">Submission Deadline</span>
+                    <div class="detail-value" id="submissionDeadline">
+                        To be assigned
+                    </div>
+                </div>
+
+                <div>
+                    <span class="detail-label">Application Status</span>
+                    <div class="detail-value">
+                        <span class="status pending" id="applicationStatus">
+                            In Progress
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DOCUMENT REQUIREMENTS -->
+
+        <div class="section-heading">Document Requirements</div>
+
+        <section class="panel">
+
+            <h2>Document Submission Tracker</h2>
+
+            <p class="panel-description">
+                Documents requested for your selected certification scheme
+                will be displayed here. You can monitor the review status
+                of each submission.
+            </p>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Document</th>
+                            <th>Date Requested</th>
+                            <th>Deadline</th>
+                            <th>Submission Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="documentTable">
+
+                        <tr>
+                            <td colspan="4" class="empty-row">
+                                No document requests have been issued yet.
+                                Your document checklist will appear here
+                                once it has been assigned.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div class="notice" style="margin-top:18px">
+                <strong>Submission period:</strong> 14 days from the
+                document request date.
+
+                <br>
+
+                <strong>Reminders:</strong> Notifications are scheduled
+                for day 7 and day 12.
+
+                <br>
+
+                <strong>Document statuses:</strong>
+                Not Submitted, Submitted, Under Review, Accepted,
+                Changes Required and Resubmitted.
+            </div>
+
+        </section>
+
+
+        <!-- PAYMENTS AND ASSESSMENT -->
+
+        <div class="two-column">
+
+            <section class="panel">
+
+                <h2>Fees & Payments</h2>
+
+                <p class="panel-description">
+                    View your certification quotation and payment progress.
+                </p>
+
+                <div class="info-grid">
+
+                    <div class="info-box">
+                        <strong>Quotation</strong>
+                        <span id="quotationAmount">Not yet issued</span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>50% Deposit</strong>
+                        <span id="depositAmount">Awaiting quotation</span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Outstanding Balance</strong>
+                        <span id="balanceAmount">Not yet calculated</span>
+                    </div>
+
+                </div>
+
+                <div class="status-row" style="margin-top:17px">
+                    <span>Payment Status</span>
+                    <span class="status pending" id="paymentStatus">
+                        Awaiting quotation
+                    </span>
+                </div>
+
+            </section>
+
+
+            <section class="panel">
+
+                <h2>Assessment</h2>
+
+                <p class="panel-description">
+                    Assessment scheduling and progress will be recorded here.
+                </p>
+
+                <div class="status-row">
+                    <span>Assessment Date</span>
+                    <span>Not scheduled</span>
+                </div>
+
+                <div class="status-row">
+                    <span>Assigned Assessor</span>
+                    <span>Not assigned</span>
+                </div>
+
+                <div class="status-row">
+                    <span>Assessment Progress</span>
+                    <span class="status pending">Upcoming</span>
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- REPORTS AND CORRECTIVE ACTIONS -->
+
+        <div class="two-column">
+
+            <section class="panel">
+
+                <h2>Reports</h2>
+
+                <p class="panel-description">
+                    Completed assessment reports and official application
+                    reports will be made available here.
+                </p>
+
+                <div class="notice">
+                    No reports are currently available.
+                    Reports will appear here once they have been
+                    completed and released.
+                </div>
+
+            </section>
+
+
+            <section class="panel">
+
+                <h2>Corrective Actions</h2>
+
+                <p class="panel-description">
+                    Monitor any non-conformances identified during assessment.
+                </p>
+
+                <div class="status-row">
+                    <span>Major NCR</span>
+                    <span>30-day deadline</span>
+                </div>
+
+                <div class="status-row">
+                    <span>Minor NCR</span>
+                    <span>60-day deadline</span>
+                </div>
+
+                <div class="status-row">
+                    <span>Immediate Action</span>
+                    <span>As instructed</span>
+                </div>
+
+                <div class="notice" style="margin-top:13px">
+                    No corrective actions have been recorded.
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- DECISION AND CERTIFICATE -->
+
+        <div class="section-heading">Certification Outcome</div>
+
+        <section class="panel">
+
+            <div class="two-column">
+
+                <div>
+                    <h2>Certification Decision</h2>
+
+                    <p class="panel-description">
+                        The formal Certification Decision Panel (CDP)
+                        outcome will be recorded after the assessment
+                        and applicable review processes.
+                    </p>
+
+                    <div class="status pending" id="decisionStatus">
+                        Decision Pending
+                    </div>
+
+                </div>
+
+                <div>
+                    <h2>Certificate Information</h2>
+
+                    <p class="panel-description">
+                        If certification is awarded, certificate details
+                        and verification information will be available here.
+                    </p>
+
+                    <div class="status pending" id="certificateStatus">
+                        Not Issued
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="info-grid" style="margin-top:22px">
+
+                <div class="info-box">
+                    <strong>Certificate Number</strong>
+                    <span id="certificateNumber">Not issued</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Validity Period</strong>
+                    <span id="certificateValidity">Not available</span>
+                </div>
+
+                <div class="info-box">
+                    <strong>QR Verification</strong>
+                    <span id="certificateQR">Not available</span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+</main>
+</div>
+
+
+<script>
+
+/* REGISTERED CLIENT INFORMATION */
+
+function getStoredValue(key) {
+    return sessionStorage.getItem(key)
+        || localStorage.getItem(key)
+        || "";
+}
+
+let savedClientData = {};
+
+try {
+    savedClientData = JSON.parse(
+        localStorage.getItem("gaiaClientData") || "{}"
+    );
+} catch (error) {
+    savedClientData = {};
+}
+
+const firstName = getStoredValue("firstName");
+const lastName = getStoredValue("lastName");
+
+const fullName = [firstName, lastName]
+    .filter(Boolean).join(" ").trim();
+
+const businessName =
+    getStoredValue("business")
+    || savedClientData.business
+    || "";
+
+const clientID =
+    getStoredValue("clientID")
+    || savedClientData.clientID
+    || "";
+
+const selectedScheme =
+    getStoredValue("selectedScheme")
+    || savedClientData.selectedScheme
+    || "";
+
+const displayName = fullName || businessName || "Client";
+
+
+/* DISPLAY REGISTERED DETAILS */
+
+document.getElementById("headerUserName").textContent = displayName;
+
+document.getElementById("userInitial").textContent =
+    displayName.charAt(0).toUpperCase();
+
+document.getElementById("clientID").textContent =
+    clientID || "Not available";
+
+document.getElementById("businessName").textContent =
+    businessName || "Not provided";
+
+document.getElementById("contactName").textContent =
+    fullName || "Not provided";
+
+document.getElementById("schemeName").textContent =
+    selectedScheme || "Scheme not selected";
+
+
+/* APPLICATION INFORMATION */
+
+document.getElementById("applicationReference").textContent =
+    getStoredValue("applicationReference")
+    || savedClientData.applicationReference
+    || "To be assigned";
+
+document.getElementById("applicationDate").textContent =
+    getStoredValue("applicationDate")
+    || savedClientData.applicationDate
+    || "To be populated";
+
+
+/* NINE STAGE WORKFLOW */
+
+const stages = [
+    "Enquiry & Proposal",
+    "Application & Agreement",
+    "Pre-Assessment",
+    "Assessment",
+    "Reporting",
+    "Certification Decision",
+    "Certificate Issuance",
+    "Surveillance & Renewal",
+    "Closed"
+];
+
+const currentStageNumber = Number(
+    getStoredValue("currentStageNumber")
+    || savedClientData.currentStageNumber
+    || 3
+);
+
+const validStage = Math.min(
+    9,
+    Math.max(1, currentStageNumber)
+);
+
+const stageGrid = document.getElementById("stageGrid");
+
+stageGrid.innerHTML = "";
+
+stages.forEach(function(stage, index) {
+
+    const number = index + 1;
+
+    let status = "Upcoming";
+    let className = "stage-card";
+
+    if (number < validStage) {
+        status = "Completed";
+        className += " completed";
+    }
+
+    if (number === validStage) {
+        status = "In Progress";
+        className += " current";
+    }
+
+    if (validStage === 9 && number === 9) {
+        status = "Current";
+    }
+
+    const card = document.createElement("div");
+    card.className = className;
+
+    card.innerHTML = `
+        <div class="stage-number">${number}</div>
+        <div class="stage-name"></div>
+        <div class="stage-status">${status}</div>
+    `;
+
+    card.querySelector(".stage-name").textContent = stage;
+
+    stageGrid.appendChild(card);
+
+});
+
+const progress = Math.round((validStage / 9) * 100);
+
+document.getElementById("progressFill").style.width =
+    progress + "%";
+
+document.getElementById("progressPercent").textContent =
+    progress + "%";
+
+document.getElementById("progressLabel").textContent =
+    validStage === 9
+    ? "Application workflow closed"
+    : stages[validStage - 1];
+
+
+/* CURRENT STAGE DETAILS */
+
+document.getElementById("currentStage").textContent =
+    "CURRENT STAGE: " + stages[validStage - 1].toUpperCase();
+
+document.getElementById("stageDetail").textContent =
+    stages[validStage - 1];
+
+document.getElementById("nextAction").textContent =
+    getStoredValue("nextAction")
+    || savedClientData.nextAction
+    || (validStage === 3
+        ? "Awaiting document requirements"
+        : "Awaiting application update");
+
+document.getElementById("submissionDeadline").textContent =
+    getStoredValue("submissionDeadline")
+    || savedClientData.submissionDeadline
+    || "To be assigned";
+
+document.getElementById("applicationStatus").textContent =
+    validStage === 9 ? "Closed" : "In Progress";
+
+
+/* PAYMENT INFORMATION */
+
+const paymentFields = [
+    ["quotationAmount", "quotationAmount", "Not yet issued"],
+    ["depositAmount", "depositAmount", "Awaiting quotation"],
+    ["balanceAmount", "balanceAmount", "Not yet calculated"],
+    ["paymentStatus", "paymentStatus", "Awaiting quotation"]
+];
+
+paymentFields.forEach(function(field) {
+
+    const stored =
+        getStoredValue(field[1])
+        || savedClientData[field[1]]
+        || "";
+
+    document.getElementById(field[0]).textContent =
+        stored || field[2];
+
+});
+
+
+/* LOG OUT */
+
+document.getElementById("logoutButton")
+.addEventListener("click", function() {
+
+    if (confirm("Are you sure you want to log out?")) {
+        sessionStorage.clear();
+        window.location.href = "login.html";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
