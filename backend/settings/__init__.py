@@ -1,9 +1,8 @@
 import os
 
 from .development import DevelopmentConfig
-from .testing import TestingConfig
 from .production import ProductionConfig
-
+from .testing import TestingConfig
 
 configurations = {
     "development": DevelopmentConfig,
@@ -16,8 +15,6 @@ def get_config():
     environment = os.getenv("APP_ENV", "development")
 
     if environment not in configurations:
-        raise RuntimeError(
-            f"Unknown application environment: {environment}"
-        )
+        raise RuntimeError(f"Unknown application environment: {environment}")
 
     return configurations[environment]

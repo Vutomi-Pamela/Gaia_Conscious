@@ -16,9 +16,11 @@ class ProductionConfigTests(unittest.TestCase):
             "ALLOWED_HOSTS": "localhost",
         }
 
-        with patch.dict(os.environ, test_environment, clear=True):
-            with self.assertRaisesRegex(RuntimeError, "SECRET_KEY"):
-                ProductionConfig.validate()
+        with (
+            patch.dict(os.environ, test_environment, clear=True),
+            self.assertRaisesRegex(RuntimeError, "SECRET_KEY"),
+        ):
+            ProductionConfig.validate()
 
     def test_debug_enabled_fails(self):
         test_environment = {
@@ -30,9 +32,11 @@ class ProductionConfigTests(unittest.TestCase):
             "DEBUG": "true",
         }
 
-        with patch.dict(os.environ, test_environment, clear=True):
-            with self.assertRaisesRegex(RuntimeError, "DEBUG"):
-                ProductionConfig.validate()
+        with (
+            patch.dict(os.environ, test_environment, clear=True),
+            self.assertRaisesRegex(RuntimeError, "DEBUG"),
+        ):
+            ProductionConfig.validate()
 
 
 if __name__ == "__main__":

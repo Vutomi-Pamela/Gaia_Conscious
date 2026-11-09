@@ -1,4 +1,6 @@
 import os
+from typing import ClassVar
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,7 +17,7 @@ class BaseConfig:
     USE_TZ = True
     LANGUAGE_CODE = "en-za"
 
-    ALLOWED_HOSTS = [
+    ALLOWED_HOSTS: ClassVar[list[str]]= [
         host.strip()
         for host in os.getenv("ALLOWED_HOSTS", "").split(",")
         if host.strip()

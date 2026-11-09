@@ -1,7 +1,6 @@
 from flask import Flask, jsonify
 from settings import get_config
 
-
 app = Flask(__name__)
 
 # Load the selected environment configuration
@@ -16,13 +15,13 @@ app.config.from_object(config_class)
 
 @app.route("/")
 def home():
-    return jsonify({
-        "message": "Gaia Conscious backend is running!",
-        "environment": app.config.get("ENVIRONMENT", "development")
-    })
+    return jsonify(
+        {
+            "message": "Gaia Conscious backend is running!",
+            "environment": app.config.get("ENVIRONMENT", "development"),
+        }
+    )
 
 
 if __name__ == "__main__":
-    app.run(
-        debug=app.config.get("DEBUG", False)
-    )
+    app.run(debug=app.config.get("DEBUG", False))

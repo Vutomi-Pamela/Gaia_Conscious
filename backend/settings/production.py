@@ -26,8 +26,7 @@ class ProductionConfig(BaseConfig):
         if missing:
             raise RuntimeError(
                 "Production configuration error. "
-                "Missing environment variables: "
-                + ", ".join(missing)
+                "Missing environment variables: " + ", ".join(missing)
             )
 
         debug_value = os.getenv("DEBUG", "false").strip().lower()
